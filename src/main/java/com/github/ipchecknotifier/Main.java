@@ -1,5 +1,6 @@
 package com.github.ipchecknotifier;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.configuration.ConfigurationException;
@@ -11,7 +12,7 @@ import org.apache.commons.configuration.ConfigurationException;
 public class Main {
     public static String publicIP = null;
     
-    public static void main(String[] args) throws ClassNotFoundException, ConfigurationException
+    public static void main(String[] args) throws ClassNotFoundException, ConfigurationException, SQLException
     {
         DBinterface db = new DBinterface();
         ReadPropFile readpropfile = new ReadPropFile();

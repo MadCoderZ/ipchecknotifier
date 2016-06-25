@@ -10,6 +10,11 @@ import java.sql.Statement;
 public class DBinterface {
     public static final String DBPATH = "jdbc:sqlite:ipchecker.sqlite.db";
       
+    DBinterface() throws SQLException, ClassNotFoundException
+    {
+        createTableIfNotExists();
+    }
+
     /**
      * connect() to establish a DB connection (sqlite)
      */
@@ -102,7 +107,6 @@ public class DBinterface {
     public boolean istheIPnew(String publicIP) throws ClassNotFoundException {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String lastip = null;
-        boolean status = false;
         
         try (Connection connection = this.connect();
              Statement stmt  = connection.createStatement();
@@ -114,17 +118,31 @@ public class DBinterface {
                 //System.out.println("Getting the IP from the last record on DB: " + rs.getString("IP")); 
             }
             
-            if (lastip != null) {
-                if (!lastip.equals(publicIP)) {
-                    status = true;
-                } else {
-                    status = false;
-                }
-            }
+            if (lastip == null)
+                return true;
+
+            if (!lastip.equals(publicIP))
+                return true;
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }  
-    return status;
+        return false;
+    }
+
+    private void createTableIfNotExists() throws SQLException, ClassNotFoundException
+    {
+        final String sql =  "CREATE TABLE IF NOT EXISTS `info` (\n" +
+                            "	`ID`	INTEGER NOT NULL,\n" +
+                            "	`IP`	TEXT NOT NULL,\n" +
+                            "	`DATE`	TEXT NOT NULL,\n" +
+                            "	`COMMENTS`	TEXT,\n" +
+                            "	PRIMARY KEY(ID)\n" +
+                            ");";
+
+            Connection connection = this.connect();
+             Statement stmt  = connection.createStatement();
+             stmt.execute(sql);
     }
 }

@@ -18,6 +18,11 @@ public class Main {
         ReadPropFile readpropfile = new ReadPropFile();
         Mail mail = new Mail();
 
+        if (!readpropfile.isConfigured()) {
+            System.err.println("ipchecker.properties hasn't been properly configured.");
+            System.exit(1);
+        }
+        
         try {
             IpChecker ipchecker = new IpChecker();
             Main.publicIP = ipchecker.showIp(); 

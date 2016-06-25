@@ -14,6 +14,14 @@ public class ReadPropFile {
     private String smtp = null;
     private String port = null;
 
+    public boolean isConfigured() 
+    {
+        if (config.getProperty("comment.me") != null)
+            return false;
+        
+        return true;
+    }
+
     public String getSmtp() {
         return smtp;
     }
@@ -80,6 +88,7 @@ public class ReadPropFile {
 //        System.out.println("--------------------------------------------------------");
         
 //      Load field from .properties file into separated variables.
+//      Check if properties file have been edited or not.        
         this.mailfrom = config.getString("mail.from");
         this.mailto = config.getString("mail.to");
         this.subject = config.getString("mail.subject");

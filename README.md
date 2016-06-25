@@ -6,6 +6,12 @@ This is an application written for testing purposes mostly, and learning java. M
 
 This little application consists of two files: .properties and .sqlite, first for app config purpose, and the .sqlite is the database where all the IP changes will be recorded.
 
+##Running the Application for the very first time
+To get the application running you first must set your email, password, and other stuff into the .properties file. You will understand how to config it in the next section. Once you modified and configured please remove or comment the following line:  
+
+**comment.me = true**
+
+Then you will be able to run the app, otherwise if the line exists the application will quit with an error message.
 ##**ipchecker.properties** format
 
 These are the fields required and parsed by the application in order to run properly.

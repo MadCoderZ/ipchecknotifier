@@ -17,7 +17,7 @@ public class Mail {
      * @param readpropfile
      * @throws ConfigurationException
      */
-    public void sendMail(ReadPropFile readpropfile) throws ConfigurationException {
+    public void sendMail(ReadPropFile readpropfile, String publicIP) throws ConfigurationException {
 
             final String username = readpropfile.getMailfrom();
             final String password = readpropfile.getPasswd();
@@ -40,7 +40,7 @@ public class Mail {
                             InternetAddress.parse(readpropfile.getMailto()));
                     message.setSubject(readpropfile.getSubject());
                     message.setText("Dear IP Check Notifier user,"
-                            + "\n\nYour new IP is: " + Main.publicIP);
+                            + "\n\nYour new IP is: " + publicIP);
 
                     Transport.send(message);
 

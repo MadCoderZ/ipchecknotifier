@@ -9,11 +9,10 @@ import org.apache.commons.configuration.ConfigurationException;
  * IPCheckNotifier v0.1 - 2016 - gera.canosa@gmail.com
  * @author Gerardo Canosa
  */
-public class Main {
-    public static String publicIP = null;
-    
+public class Main {    
     public static void main(String[] args) throws ClassNotFoundException, ConfigurationException, SQLException
     {
+        String publicIP = null;
         DBinterface db = new DBinterface();
         ReadPropFile readpropfile = new ReadPropFile();
         Mail mail = new Mail();
@@ -25,7 +24,7 @@ public class Main {
         
         try {
             IpChecker ipchecker = new IpChecker();
-            Main.publicIP = ipchecker.showIp(); 
+            publicIP = ipchecker.showIp(); 
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -39,12 +38,12 @@ public class Main {
                 // add DB record with information and current ip only if the Public IP changed from the last record
                 // on the DB. istheIPnew() compares and returns true/false depending on the status.
                 if (db.istheIPnew(publicIP)) {
-                    db.insertDB(Main.publicIP, DateMgmt.getDate(), "ip added");
-                    System.out.println("Sending email to: " + readpropfile.getMailto() + " -->> " + Main.publicIP);
+                    db.insertDB(publicIP, DateMgmt.getDate(), "ip added");
+                    System.out.println("Sending email to: " + readpropfile.getMailto() + " -->> " + publicIP);
                     // Send email with new IP
-                    mail.sendMail(readpropfile);
+                    mail.sendMail(readpropfile, publicIP);
                 } else {
-                    System.out.println("IP didn't change, not added to the DB: " + Main.publicIP);
+                    System.out.println("IP didn't change, not added to the DB: " + publicIP);
                 }
             // if history is passed as argument show the lasts IP records from the DB.
             } else if (args[0].startsWith("history")) {
@@ -65,12 +64,12 @@ public class Main {
                 System.out.println();
             } else {
                 System.out.println("Invalid command-line parameter(s) given. Try with ip/history/lastip/cleandb/about");
-                System.out.println("Showing public IP: " + Main.publicIP);
+                System.out.println("Showing public IP: " + publicIP);
             }
         } else {
 //            no parameters given showing default message.
             System.err.println("No command-line parameters given. Try with ip/history/lastip/cleandb/about");
-            System.out.println("Showing public IP: " + Main.publicIP);
+            System.out.println("Showing public IP: " + publicIP);
         }
     }
 }

@@ -1,4 +1,4 @@
-#**IPCheckNotifier** v0.1 - 2016 ![IPCheckNotifier Logo](https://github.com/berkelioar/ipchecknotifier/blob/master/icon.png "IPCheckNotifier Logo")
+#**IPCheckNotifier** v0.1 - 2016
 ##Written by Gerardo Canosa and Geronimo Poppino
 
 

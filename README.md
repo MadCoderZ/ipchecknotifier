@@ -1,6 +1,6 @@
-#**IPCheckNotifier** v0.1 - 2016
-##Written by Gerardo Canosa - gera.canosa@gmail.com
-![IPCheckNotifier Logo](https://github.com/berkelioar/ipchecknotifier/blob/master/icon.png "IPCheckNotifier Logo")
+#**IPCheckNotifier** v0.1 - 2016 ![IPCheckNotifier Logo](https://github.com/berkelioar/ipchecknotifier/blob/master/icon.png "IPCheckNotifier Logo")
+##Written by Gerardo Canosa and Geronimo Poppino
+
 
 This is an application written for testing purposes mostly, and learning java. Many different concepts have been applied (DB, Socks, Properties file configuration read/write access, Mail, Arguments cmd line).
 
@@ -10,13 +10,13 @@ This little application consists of two files: .properties and .sqlite, first fo
 
 These are the fields required and parsed by the application in order to run properly.
 
-mailfrom = YOUR@email.here  
-mailto = YOUR@email.here  
-passwd = YOUR_EMAIL_PASSWD_HERE  
-subject = IPCheckerNotifier status  
-smtp = smtp.gmail.com  
-smtp_port = 587  
-frequencycheck = 15  
+mail.from = mail@from.com  
+mail.to = mail@to.com  
+mail.smtp = smtp.gmail.com  
+mail.port = 587 
+mail.subject = IPCheckNotifier update  
+mail.password = REPLACE_PASSWORD_HERE   
+frequencycheck = IN_MINUTES  
 
 ##Contact the author (Gerardo Canosa/EtherNet)
 

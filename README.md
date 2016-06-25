@@ -1,5 +1,6 @@
 #**IPCheckNotifier** v0.1 - 2016
 ##Written by Gerardo Canosa - gera.canosa@gmail.com
+![IPCheckNotifier Logo](https://github.com/berkelioar/ipchecknotifier/blob/master/icon.png "IPCheckNotifier Logo")
 
 This is an application written for testing purposes mostly, and learning java. Many different concepts have been applied (DB, Socks, Properties file configuration read/write access, Mail, Arguments cmd line).
 

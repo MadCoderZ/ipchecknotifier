@@ -11,6 +11,24 @@ public class ReadPropFile {
     private Integer frequencycheck = null;
     private CompositeConfiguration config = null;
     private String passwd = null;
+    private String smtp = null;
+    private String port = null;
+
+    public String getSmtp() {
+        return smtp;
+    }
+
+    public void setSmtp(String smtp) {
+        this.smtp = smtp;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
     
     public String getPasswd() {
         return passwd;
@@ -62,10 +80,12 @@ public class ReadPropFile {
 //        System.out.println("--------------------------------------------------------");
         
 //      Load field from .properties file into separated variables.
-        this.mailfrom = config.getString("mailfrom");
-        this.mailto = config.getString("mailto");
-        this.subject = config.getString("subject");
+        this.mailfrom = config.getString("mail.from");
+        this.mailto = config.getString("mail.to");
+        this.subject = config.getString("mail.subject");
         this.frequencycheck = config.getInt("frequencycheck");
-        this.passwd = config.getString("passwd");
+        this.passwd = config.getString("mail.password");
+        this.smtp = config.getString("mail.smtp");
+        this.port = config.getString("mail.port");
         }
 }

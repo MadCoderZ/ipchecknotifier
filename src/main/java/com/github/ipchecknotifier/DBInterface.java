@@ -6,21 +6,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBInterface {
-    public static final String DBPATH = "jdbc:sqlite:ipchecker.sqlite.db";
+    public static String DBPATH = "jdbc:sqlite:";
 
-    DBInterface() throws SQLException, ClassNotFoundException
+    DBInterface(String path) throws SQLException, ClassNotFoundException
     {
+        this.DBPATH += path;
         createTableIfNotExists();
     }
 
     /**
      * connect() to establish a DB connection (sqlite)
      */
-    private Connection getConnection() throws SQLException, ClassNotFoundException 
+    private Connection getConnection() throws SQLException, ClassNotFoundException
     {
         Connection conn = null;
 
@@ -35,26 +38,33 @@ public class DBInterface {
 
     /**
      * Fetch everything from the database and output.
+     * @return List list of IP records
      * @throws ClassNotFoundException
      */
-    public void fetchAll() throws ClassNotFoundException
+    public List<IPRecord> fetchAll() throws ClassNotFoundException
     {
-        final String sql = "SELECT ID, IP, DATE, COMMENTS FROM info";
+        final String sql =
+                "SELECT ID, IP, DATE, COMMENTS FROM info ORDER BY DATE DESC";
 
+        List<IPRecord> records = new ArrayList<>();
         try (Connection connection = this.getConnection();
              Statement stmt  = connection.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
 
-            // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getInt("ID") +  "\t\t" +
-                                   rs.getString("IP") + "\t\t" +
-                                   rs.getString("DATE") + "\t\t" +
-                                   rs.getString("COMMENTS"));
+                IPRecord myIP = new IPRecord();
+
+                myIP.setIP(rs.getString("IP"));
+                myIP.setDate(rs.getString("DATE"));
+                myIP.setComments(rs.getString("COMMENTS"));
+
+                records.add(myIP);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return records;
     }
 
     /**
@@ -62,7 +72,7 @@ public class DBInterface {
      * @return
      * @throws ClassNotFoundException
      */
-    public String fetchIP() 
+    public String fetchIP()
     {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String ip = null;
@@ -89,7 +99,7 @@ public class DBInterface {
      * @param comments
      * @throws ClassNotFoundException
      */
-    public void insertDB(String IP, String date, String comments) 
+    public void insertDB(String IP, String date, String comments)
     {
         final String sql = "INSERT INTO info(IP, DATE, COMMENTS) VALUES(?,?,?)";
 
@@ -110,7 +120,7 @@ public class DBInterface {
      * @return
      * @throws ClassNotFoundException
      */
-    public boolean istheIPnew(String publicIP) 
+    public boolean istheIPnew(String publicIP)
     {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String lastip = null;

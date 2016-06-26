@@ -98,16 +98,6 @@ public class PropertyFileReader {
     {
         this.subject = subject;
     }
-
-    public Integer getFrequencycheck()
-    {
-        return frequencycheck;
-    }
-
-    public void setFrequencycheck(Integer frequencycheck)
-    {
-        this.frequencycheck = frequencycheck;
-    }
     
     PropertyFileReader() throws ConfigurationException
     {

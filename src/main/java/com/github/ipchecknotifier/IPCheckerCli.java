@@ -103,7 +103,7 @@ public class IPCheckerCli {
     
     private void cleanDB()
     {
-        
+        this.db.cleanDB();
     }
     
     private void showHelp()

@@ -20,7 +20,7 @@ public class DBInterface {
     /**
      * connect() to establish a DB connection (sqlite)
      */
-    private Connection connect() throws SQLException, ClassNotFoundException {
+    private Connection getConnection() throws SQLException, ClassNotFoundException {
         Connection conn = null;
 
         try {
@@ -39,7 +39,7 @@ public class DBInterface {
     public void fetchAll() throws ClassNotFoundException{
         final String sql = "SELECT ID, IP, DATE, COMMENTS FROM info";
 
-        try (Connection connection = this.connect();
+        try (Connection connection = this.getConnection();
              Statement stmt  = connection.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
 
@@ -64,7 +64,7 @@ public class DBInterface {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String ip = null;
 
-        try (Connection connection = this.connect();
+        try (Connection connection = this.getConnection();
              Statement stmt  = connection.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
 
@@ -89,7 +89,7 @@ public class DBInterface {
     public void insertDB(String IP, String date, String comments) {
         final String sql = "INSERT INTO info(IP, DATE, COMMENTS) VALUES(?,?,?)";
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, IP);
             pstmt.setString(2, date);
@@ -110,7 +110,7 @@ public class DBInterface {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String lastip = null;
 
-        try (Connection connection = this.connect();
+        try (Connection connection = this.getConnection();
              Statement stmt  = connection.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
 
@@ -141,8 +141,20 @@ public class DBInterface {
                             "	PRIMARY KEY(ID)\n" +
                             ");";
 
-            Connection connection = this.connect();
+            Connection connection = this.getConnection();
              Statement stmt  = connection.createStatement();
              stmt.execute(sql);
+    }
+    
+    public void cleanDB()
+    {
+        final String sql = "DELETE FROM info";
+        
+        try {
+            Statement stmt = this.getConnection().createStatement();
+            stmt.execute(sql);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(DBInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

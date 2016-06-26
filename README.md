@@ -23,6 +23,9 @@ mail.port = 587
 mail.subject = IPCheckNotifier update  
 mail.password = REPLACE_PASSWORD_HERE   
 
+mail.auth = true  
+mail.tls = true  
+
 ##Contact the author (Gerardo Canosa/EtherNet)
 
 If you need support, or want to suggest a feature, you're welcome to reach me out by email at: gera.canosa@gmail.com or irc.mundochat.com.ar #MundoChat under the nickname: EtherNet

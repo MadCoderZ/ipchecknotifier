@@ -30,7 +30,7 @@ mail.tls = true
 
 To monitor your public IP for eventual changes, add the application to cron as follows:  
 
-  */5 * * * * java -jar /path/where/ipchecknotifier/remains.jar -g
+	*/5 * * * * java -jar /path/where/ipchecknotifier/remains.jar -g
 
 
 ##Contact the author (Gerardo Canosa/EtherNet)

@@ -24,8 +24,8 @@ public class Mailer {
             final String password = propReader.getPasswd();
             
             Properties props = new Properties();
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.auth", propReader.isAuth());
+            props.put("mail.smtp.starttls.enable", propReader.isTls());
             props.put("mail.smtp.host", propReader.getSmtp());
             props.put("mail.smtp.port", propReader.getPort());
 

@@ -13,6 +13,22 @@ public class PropertyFileReader {
     private String smtp = null;
     private String port = null;
     private boolean auth = true;
+
+    public boolean isAuth() {
+        return auth;
+    }
+
+    public void setAuth(boolean auth) {
+        this.auth = auth;
+    }
+
+    public boolean isTls() {
+        return tls;
+    }
+
+    public void setTls(boolean tls) {
+        this.tls = tls;
+    }
     private boolean tls = true;
 
     public boolean isConfigured()

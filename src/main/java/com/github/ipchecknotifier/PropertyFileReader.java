@@ -8,7 +8,6 @@ public class PropertyFileReader {
     private String mailfrom = null;
     private String mailto = null;
     private String subject = null;
-    private Integer frequencycheck = null;
     private CompositeConfiguration config = null;
     private String passwd = null;
     private String smtp = null;
@@ -92,7 +91,7 @@ public class PropertyFileReader {
         this.frequencycheck = frequencycheck;
     }
     
-    PropertyFileReader() throws ConfigurationException 
+    PropertyFileReader() throws ConfigurationException
     {
         this.config = new CompositeConfiguration();
         config.addConfiguration(new PropertiesConfiguration("ipchecker.properties"));
@@ -102,11 +101,10 @@ public class PropertyFileReader {
 //        System.out.println("--------------------------------------------------------");
 
 //      Load field from .properties file into separated variables.
-//      Check if properties file have been edited or not.        
+//      Check if properties file have been edited or not.
         this.mailfrom = config.getString("mail.from");
         this.mailto = config.getString("mail.to");
         this.subject = config.getString("mail.subject");
-        this.frequencycheck = config.getInt("frequencycheck");
         this.passwd = config.getString("mail.password");
         this.smtp = config.getString("mail.smtp");
         this.port = config.getString("mail.port");

@@ -16,6 +16,8 @@ Then you will be able to run the app, otherwise if the line exists the applicati
 
 These are the fields required and parsed by the application in order to run properly.
 
+checker.url = http://checkip.amazonaws.com  
+
 mail.from = mail@from.com  
 mail.to = mail@to.com  
 mail.smtp = smtp.gmail.com  

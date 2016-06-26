@@ -62,7 +62,7 @@ public class IPCheckerCli {
     {
         String publicIP = null;
         try {
-            publicIP = IpChecker.getIP();
+            publicIP = IPChecker.getIP();
         } catch (Exception ex) {
             Logger.getLogger(IPCheckerCli.class.getName()).log(Level.SEVERE, null, ex);
             return;

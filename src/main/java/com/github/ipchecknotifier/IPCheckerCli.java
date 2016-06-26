@@ -94,7 +94,8 @@ public class IPCheckerCli {
             System.out.println("There are no records found. DB is empty.");
             return;
         }
-
+        
+        System.out.println("    IP  \t\t\tDATE  \t\t\tCOMMENTS");
         for (IPRecord r : records) {
             System.out.println(r.getIP() + "\t\t" + r.getDate() + "\t\t" +
                     r.getComments());

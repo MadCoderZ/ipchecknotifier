@@ -19,10 +19,9 @@ These are the fields required and parsed by the application in order to run prop
 mail.from = mail@from.com  
 mail.to = mail@to.com  
 mail.smtp = smtp.gmail.com  
-mail.port = 587 
+mail.port = 587  
 mail.subject = IPCheckNotifier update  
 mail.password = REPLACE_PASSWORD_HERE   
-frequencycheck = IN_MINUTES  
 
 ##Contact the author (Gerardo Canosa/EtherNet)
 

@@ -20,7 +20,8 @@ public class DBInterface {
     /**
      * connect() to establish a DB connection (sqlite)
      */
-    private Connection getConnection() throws SQLException, ClassNotFoundException {
+    private Connection getConnection() throws SQLException, ClassNotFoundException 
+    {
         Connection conn = null;
 
         try {
@@ -36,7 +37,8 @@ public class DBInterface {
      * Fetch everything from the database and output.
      * @throws ClassNotFoundException
      */
-    public void fetchAll() throws ClassNotFoundException{
+    public void fetchAll() throws ClassNotFoundException
+    {
         final String sql = "SELECT ID, IP, DATE, COMMENTS FROM info";
 
         try (Connection connection = this.getConnection();
@@ -60,7 +62,8 @@ public class DBInterface {
      * @return
      * @throws ClassNotFoundException
      */
-    public String fetchIP() {
+    public String fetchIP() 
+    {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String ip = null;
 
@@ -86,7 +89,8 @@ public class DBInterface {
      * @param comments
      * @throws ClassNotFoundException
      */
-    public void insertDB(String IP, String date, String comments) {
+    public void insertDB(String IP, String date, String comments) 
+    {
         final String sql = "INSERT INTO info(IP, DATE, COMMENTS) VALUES(?,?,?)";
 
         try (Connection conn = this.getConnection();
@@ -106,7 +110,8 @@ public class DBInterface {
      * @return
      * @throws ClassNotFoundException
      */
-    public boolean istheIPnew(String publicIP) {
+    public boolean istheIPnew(String publicIP) 
+    {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String lastip = null;
 

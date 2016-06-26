@@ -17,7 +17,8 @@ public class Mailer {
      * @param propReader
      * @throws ConfigurationException
      */
-    public void sendMail(PropertyFileReader propReader, String publicIP) {
+    public void sendMail(PropertyFileReader propReader, String publicIP) 
+    {
 
             final String username = propReader.getMailfrom();
             final String password = propReader.getPasswd();

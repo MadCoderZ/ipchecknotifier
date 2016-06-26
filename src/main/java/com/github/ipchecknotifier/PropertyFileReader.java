@@ -22,59 +22,73 @@ public class PropertyFileReader {
         return true;
     }
 
-    public String getSmtp() {
+    public String getSmtp() 
+    {
         return smtp;
     }
 
-    public void setSmtp(String smtp) {
+    public void setSmtp(String smtp) 
+    {
         this.smtp = smtp;
     }
 
-    public String getPort() {
+    public String getPort() 
+    {
         return port;
     }
 
-    public void setPort(String port) {
+    public void setPort(String port) 
+    {
         this.port = port;
     }
     
-    public String getPasswd() {
+    public String getPasswd() 
+    {
         return passwd;
     }
 
-    public void getPasswd(String passwd) {
+    public void getPasswd(String passwd) 
+    {
         this.passwd = passwd;
     }
     
-    public String getMailfrom() {
+    public String getMailfrom() 
+    {
         return mailfrom;
     }
 
-    public void setMailfrom(String mailfrom) {
+    public void setMailfrom(String mailfrom) 
+    {
         this.mailfrom = mailfrom;
     }
 
-    public String getMailto() {
+    public String getMailto() 
+    {
         return mailto;
     }
 
-    public void setMailto(String mailto) {
+    public void setMailto(String mailto) 
+    {
         this.mailto = mailto;
     }
 
-    public String getSubject() {
+    public String getSubject() 
+    {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setSubject(String subject) 
+    {
         this.subject = subject;
     }
 
-    public Integer getFrequencycheck() {
+    public Integer getFrequencycheck() 
+    {
         return frequencycheck;
     }
 
-    public void setFrequencycheck(Integer frequencycheck) {
+    public void setFrequencycheck(Integer frequencycheck) 
+    {
         this.frequencycheck = frequencycheck;
     }
     

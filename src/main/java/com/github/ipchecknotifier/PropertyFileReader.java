@@ -14,7 +14,34 @@ public class PropertyFileReader {
     private String port = null;
     private boolean auth = true;
     private boolean tls = true;
+    private String checkerURL = null;
 
+    PropertyFileReader() throws ConfigurationException
+    {
+        this.config = new CompositeConfiguration();
+        this.config.addConfiguration(
+                new PropertiesConfiguration("ipchecker.properties"));
+
+        this.mailfrom = config.getString("mail.from");
+        this.mailto = config.getString("mail.to");
+        this.subject = config.getString("mail.subject");
+        this.passwd = config.getString("mail.password");
+        this.smtp = config.getString("mail.smtp");
+        this.port = config.getString("mail.port");
+        this.auth = config.getBoolean("mail.auth");
+        this.tls = config.getBoolean("mail.tls");
+        this.checkerURL = config.getString("checker.url");
+    }
+
+    public String getCheckerURL()
+    {
+        return checkerURL;
+    }
+
+    public void setCheckerURL(String checkerURL)
+    {
+        this.checkerURL = checkerURL;
+    }
 
     public boolean isAuth() {
         return auth;
@@ -36,7 +63,7 @@ public class PropertyFileReader {
     {
         if (config.getProperty("comment.me") != null)
             return false;
-        
+
         return true;
     }
 
@@ -59,7 +86,7 @@ public class PropertyFileReader {
     {
         this.port = port;
     }
-    
+
     public String getPasswd()
     {
         return passwd;
@@ -69,7 +96,7 @@ public class PropertyFileReader {
     {
         this.passwd = passwd;
     }
-    
+
     public String getMailfrom()
     {
         return mailfrom;
@@ -99,25 +126,4 @@ public class PropertyFileReader {
     {
         this.subject = subject;
     }
-    
-    PropertyFileReader() throws ConfigurationException
-    {
-        this.config = new CompositeConfiguration();
-        config.addConfiguration(new PropertiesConfiguration("ipchecker.properties"));
- 
-//        System.out.println("--------------------------------------------------------");
-//        System.out.println("= Reading configuration from ipchecker.properties file =");
-//        System.out.println("--------------------------------------------------------");
-
-//      Load field from .properties file into separated variables.
-//      Check if properties file have been edited or not.
-        this.mailfrom = config.getString("mail.from");
-        this.mailto = config.getString("mail.to");
-        this.subject = config.getString("mail.subject");
-        this.passwd = config.getString("mail.password");
-        this.smtp = config.getString("mail.smtp");
-        this.port = config.getString("mail.port");
-        this.auth = config.getBoolean("mail.auth");
-        this.tls = config.getBoolean("mail.tls");
-        }
 }

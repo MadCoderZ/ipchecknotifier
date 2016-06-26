@@ -6,11 +6,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public class IPChecker {
-    private static final String AMAZONURL = "http://checkip.amazonaws.com";
 
-    public static String getIP() throws Exception
+    public static String getIP(String url) throws Exception
     {
-        URL whatismyip = new URL(IPChecker.AMAZONURL);
+        URL whatismyip = new URL(url);
         BufferedReader in = null;
 
         try {

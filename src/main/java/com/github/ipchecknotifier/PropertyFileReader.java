@@ -72,7 +72,7 @@ public class PropertyFileReader {
         this.mailto = mailto;
     }
 
-    public String getSubject(
+    public String getSubject()
     {
         return subject;
     }

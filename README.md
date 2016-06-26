@@ -26,6 +26,13 @@ mail.password = REPLACE_PASSWORD_HERE
 mail.auth = true  
 mail.tls = true  
 
+##Schedule IPCheckNotifier to run through CRON every 15 minutes
+
+To monitor your public IP for eventual changes, add the application to cron as follows:  
+
+  */5 * * * * java -jar /path/where/ipchecknotifier/remains.jar -g
+
+
 ##Contact the author (Gerardo Canosa/EtherNet)
 
 If you need support, or want to suggest a feature, you're welcome to reach me out by email at: gera.canosa@gmail.com or irc.mundochat.com.ar #MundoChat under the nickname: EtherNet

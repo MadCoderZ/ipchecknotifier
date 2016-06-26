@@ -1,6 +1,7 @@
 package com.github.ipchecknotifier;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.cli.BasicParser;
@@ -18,22 +19,22 @@ public class IPCheckerCli {
     private final Options options;
 
     IPCheckerCli()
-{
+    {
         try {
-            this.db = new DBInterface();
+            this.db = new DBInterface("ipchecker.sqlite.db");
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(IPCheckerCli.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             this.propReader = new PropertyFileReader();
         } catch (ConfigurationException ex) {
             System.err.println(ex.getMessage());
         }
-        
+
         this.mailer = new Mailer();
         this.options = new Options();
-        
+
         this.buildOptions();
     }
 
@@ -67,7 +68,7 @@ public class IPCheckerCli {
             Logger.getLogger(IPCheckerCli.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
+
         System.out.println("Shows actual public IP.");
         if (this.db.istheIPnew(publicIP)) {
             this.db.insertDB(publicIP, DateMgmt.getDate(), "ip added");
@@ -82,10 +83,21 @@ public class IPCheckerCli {
     private void showRecords()
     {
         System.out.println("Show a list from sqlite db with the last IPs assigned by the ISP");
+        List<IPRecord> records = null;
         try {
-            this.db.fetchAll();
+            records = this.db.fetchAll();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IPCheckerCli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (records == null) {
+            System.out.println("There are no records found. DB is empty.");
+            return;
+        }
+
+        for (IPRecord r : records) {
+            System.out.println(r.getIP() + "\t\t" + r.getDate() + "\t\t" +
+                    r.getComments());
         }
     }
 
@@ -98,14 +110,14 @@ public class IPCheckerCli {
         System.out.println("\t\t**** Written by Gerardo Canosa ****");
         System.out.println("\t\t****** and Geronimo Poppino *******");
         System.out.println("\t\t***********************************");
-        System.out.println();        
+        System.out.println();
     }
-    
+
     private void cleanDB()
     {
         this.db.cleanDB();
     }
-    
+
     private void showHelp()
     {
         HelpFormatter formater = new HelpFormatter();
@@ -113,7 +125,7 @@ public class IPCheckerCli {
     }
 
     public void parse(String[] args)
-    {  
+    {
         // comment.me KEY must be first removed from properties file otherwise it won't run.
         if (!this.propReader.isConfigured()) {
             System.err.println("ipchecker.properties hasn't been properly configured.");

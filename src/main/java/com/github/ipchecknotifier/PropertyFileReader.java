@@ -13,6 +13,8 @@ public class PropertyFileReader {
     private String smtp = null;
     private String port = null;
     private boolean auth = true;
+    private boolean tls = true;
+
 
     public boolean isAuth() {
         return auth;
@@ -29,7 +31,6 @@ public class PropertyFileReader {
     public void setTls(boolean tls) {
         this.tls = tls;
     }
-    private boolean tls = true;
 
     public boolean isConfigured()
     {

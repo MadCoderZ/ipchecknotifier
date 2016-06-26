@@ -12,11 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBInterface {
-    public static String DBPATH = "jdbc:sqlite:";
+    private final String DBPATH;
 
     DBInterface(String path) throws SQLException, ClassNotFoundException
     {
-        this.DBPATH += path;
+        this.DBPATH = "jdbc:sqlite:" + path;
         createTableIfNotExists();
     }
 
@@ -29,7 +29,7 @@ public class DBInterface {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection(DBPATH);
+            conn = DriverManager.getConnection(this.DBPATH);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -12,6 +12,8 @@ public class PropertyFileReader {
     private String passwd = null;
     private String smtp = null;
     private String port = null;
+    private boolean auth = true;
+    private boolean tls = true;
 
     public boolean isConfigured()
     {
@@ -108,5 +110,7 @@ public class PropertyFileReader {
         this.passwd = config.getString("mail.password");
         this.smtp = config.getString("mail.smtp");
         this.port = config.getString("mail.port");
+        this.auth = config.getBoolean("mail.auth");
+        this.tls = config.getBoolean("mail.tls");
         }
 }

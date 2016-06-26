@@ -150,11 +150,11 @@ public class DBInterface {
              Statement stmt  = connection.createStatement();
              stmt.execute(sql);
     }
-    
+
     public void cleanDB()
     {
         final String sql = "DELETE FROM info";
-        
+
         try {
             Statement stmt = this.getConnection().createStatement();
             stmt.execute(sql);

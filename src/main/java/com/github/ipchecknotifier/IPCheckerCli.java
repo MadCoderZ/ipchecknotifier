@@ -16,9 +16,9 @@ public class IPCheckerCli {
     private PropertyFileReader propReader;
     private final Mailer mailer;
     private final Options options;
-    
+
     IPCheckerCli()
-    {
+{
         try {
             this.db = new DBInterface();
         } catch (SQLException | ClassNotFoundException ex) {
@@ -37,7 +37,7 @@ public class IPCheckerCli {
         this.buildOptions();
     }
 
-    private void buildOptions() 
+    private void buildOptions()
     {
         this.options.addOption("h", "help", false, "Shows help");
         this.options.addOption("l", "lastip", false, "Shows last IP record from DB.");
@@ -78,7 +78,7 @@ public class IPCheckerCli {
             System.out.println("IP didn't change, not added to the DB: " + publicIP);
         }
     }
-    
+
     private void showRecords()
     {
         System.out.println("Show a list from sqlite db with the last IPs assigned by the ISP");
@@ -111,7 +111,7 @@ public class IPCheckerCli {
         HelpFormatter formater = new HelpFormatter();
         formater.printHelp("ipchecknotifier", this.options);
     }
-    
+
     public void parse(String[] args)
     {  
         // comment.me KEY must be first removed from properties file otherwise it won't run.

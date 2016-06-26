@@ -4,7 +4,7 @@ import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-public class ReadPropFile {
+public class PropertyFileReader {
     private String mailfrom = null;
     private String mailto = null;
     private String subject = null;
@@ -78,7 +78,7 @@ public class ReadPropFile {
         this.frequencycheck = frequencycheck;
     }
     
-    ReadPropFile() throws ConfigurationException 
+    PropertyFileReader() throws ConfigurationException 
     {
         this.config = new CompositeConfiguration();
         config.addConfiguration(new PropertiesConfiguration("ipchecker.properties"));

@@ -10,23 +10,23 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.apache.commons.configuration.ConfigurationException;
 
-public class Mail {
+public class Mailer {
 
     /**
      * Used to send new IP over email.
-     * @param readpropfile
+     * @param propReader
      * @throws ConfigurationException
      */
-    public void sendMail(ReadPropFile readpropfile, String publicIP) throws ConfigurationException {
+    public void sendMail(PropertyFileReader propReader, String publicIP) {
 
-            final String username = readpropfile.getMailfrom();
-            final String password = readpropfile.getPasswd();
+            final String username = propReader.getMailfrom();
+            final String password = propReader.getPasswd();
             
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", readpropfile.getSmtp());
-            props.put("mail.smtp.port", readpropfile.getPort());
+            props.put("mail.smtp.host", propReader.getSmtp());
+            props.put("mail.smtp.port", propReader.getPort());
 
             Session session = Session.getInstance(props, new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
@@ -35,10 +35,10 @@ public class Mail {
               });
             try {
                     Message message = new MimeMessage(session);
-                    message.setFrom(new InternetAddress(readpropfile.getMailfrom()));
+                    message.setFrom(new InternetAddress(propReader.getMailfrom()));
                     message.setRecipients(Message.RecipientType.TO,
-                            InternetAddress.parse(readpropfile.getMailto()));
-                    message.setSubject(readpropfile.getSubject());
+                            InternetAddress.parse(propReader.getMailto()));
+                    message.setSubject(propReader.getSubject());
                     message.setText("Dear IP Check Notifier user,"
                             + "\n\nYour new IP is: " + publicIP);
 

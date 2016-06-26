@@ -7,13 +7,9 @@ import java.net.URL;
  
 public class IpChecker {
     private static final String AMAZONURL = "http://checkip.amazonaws.com";
-    
-    public String showIp() throws Exception
-    {
-        return getIp();
-    }
  
-    private static String getIp() throws Exception {
+    public static String getIP() throws Exception 
+    {
         URL whatismyip = new URL(IpChecker.AMAZONURL);
         BufferedReader in = null;
         

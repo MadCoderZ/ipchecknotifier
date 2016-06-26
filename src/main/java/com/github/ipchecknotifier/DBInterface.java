@@ -6,11 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class DBinterface {
+public class DBInterface {
     public static final String DBPATH = "jdbc:sqlite:ipchecker.sqlite.db";
 
-    DBinterface() throws SQLException, ClassNotFoundException
+    DBInterface() throws SQLException, ClassNotFoundException
     {
         createTableIfNotExists();
     }
@@ -58,7 +60,7 @@ public class DBinterface {
      * @return
      * @throws ClassNotFoundException
      */
-    public String fetchIP() throws ClassNotFoundException {
+    public String fetchIP() {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String ip = null;
 
@@ -71,8 +73,8 @@ public class DBinterface {
                 ip = rs.getString("IP");
                 //System.out.println("Getting the IP from the last record on DB: " + rs.getString("IP"));
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(DBInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ip;
     }
@@ -84,7 +86,7 @@ public class DBinterface {
      * @param comments
      * @throws ClassNotFoundException
      */
-    public void insertDB(String IP, String date, String comments) throws ClassNotFoundException {
+    public void insertDB(String IP, String date, String comments) {
         final String sql = "INSERT INTO info(IP, DATE, COMMENTS) VALUES(?,?,?)";
 
         try (Connection conn = this.connect();
@@ -93,8 +95,8 @@ public class DBinterface {
             pstmt.setString(2, date);
             pstmt.setString(3, comments);
             pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -104,7 +106,7 @@ public class DBinterface {
      * @return
      * @throws ClassNotFoundException
      */
-    public boolean istheIPnew(String publicIP) throws ClassNotFoundException {
+    public boolean istheIPnew(String publicIP) {
         final String sql = "SELECT IP FROM info ORDER BY DATE DESC LIMIT 1";
         String lastip = null;
 
@@ -123,10 +125,8 @@ public class DBinterface {
 
             if (!lastip.equals(publicIP))
                 return true;
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(DBInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
